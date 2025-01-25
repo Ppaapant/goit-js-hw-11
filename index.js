@@ -1,2 +1,25 @@
-import{S as u,i as a}from"./assets/vendor-BrddEoy-.js";(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))t(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const i of r.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&t(i)}).observe(document,{childList:!0,subtree:!0});function s(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function t(e){if(e.ep)return;e.ep=!0;const r=s(e);fetch(e.href,r)}})();const l=document.querySelector(".searchForm"),c=document.querySelector(".gallery"),f=new u(".gallery a"),d=n=>{const o=document.querySelector(".loader");n.preventDefault();const s=l.elements[0].value.trim();if(s===""){a.error({title:"",message:"Please enter your request",messageColor:"#fafafb",position:"topRight",backgroundColor:"#ef4040"});return}document.querySelector(".loader").classList.add("show-loader"),fetchPhotosByQuery(s).then(t=>{if(t.total===0){a.error({title:"",message:"Sorry, there are no images matching your search query. Please try again!",messageColor:"#fafafb",position:"topRight",backgroundColor:"#ef4040"}),c.innerHTML="",l.reset();return}const e=t.hits.map(r=>createGalleryCardTemplate(r)).join("");c.innerHTML=e,f.refresh()}).catch(t=>{console.log(t)}).finally(()=>{o.classList.remove("show-loader")})};l.addEventListener("submit",d);
+import{S as u,i as c}from"./assets/vendor-BrddEoy-.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))a(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const l of r.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&a(l)}).observe(document,{childList:!0,subtree:!0});function o(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function a(e){if(e.ep)return;e.ep=!0;const r=o(e);fetch(e.href,r)}})();const f=t=>`
+    <li class="gallery-card">
+      <a class="gallery-link"  href="${t.largeImageURL}">
+        <img class="gallery-img" src="${t.webformatURL}" alt="${t.tags}" /> 
+        <ul class="text-info">
+          <li class="image-info">
+            <h4>Likes</h4>
+            <p>${t.likes}</p>
+          </li>
+          <li class="image-info">
+            <h4>Views</h4>
+            <p>${t.views}</p>
+          </li>
+          <li class="image-info">
+            <h4>Comments</h4>
+            <p>${t.comments}</p>
+          </li>
+          <li class="image-info">
+            <h4>Downloads</h4>
+            <p>${t.downloads}</p>
+        </ul>
+        </a>
+    </li>
+  `,h=t=>{const s=new URLSearchParams({q:t,key:"48435162-5c42fbd719582c2a6b22bac81",image_type:"photo",orientation:"horizontal",safesearch:!0});return fetch(`https://pixabay.com/api/?${s}`).then(o=>{if(!o.ok)throw new Error(o.status);return o.json()})},i=document.querySelector(".searchForm"),n=document.querySelector(".gallery"),m=new u(".gallery a"),d=t=>{const s=document.querySelector(".loader");t.preventDefault();const o=i.elements[0].value.trim();if(o===""){c.error({title:"",message:"Please enter your request",messageColor:"#fafafb",position:"topRight",backgroundColor:"#ef4040"});return}document.querySelector(".loader").classList.add("show-loader"),h(o).then(a=>{if(a.total===0){c.error({title:"",message:"Sorry, there are no images matching your search query. Please try again!",messageColor:"#fafafb",position:"topRight",backgroundColor:"#ef4040"}),n.innerHTML="",i.reset();return}const e=a.hits.map(r=>f(r)).join("");n.innerHTML=e,m.refresh()}).catch(a=>{console.log(a)}).finally(()=>{s.classList.remove("show-loader")})};i.addEventListener("submit",d);
 //# sourceMappingURL=index.js.map
