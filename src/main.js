@@ -32,7 +32,7 @@ const searchSubmit = event => {
 
   document.querySelector('.loader').classList.add('show-loader');
 
-  fetchPhotosByQuery(searchedEl)
+  fetchQueriesbyPhoto(searchedEl)
     .then(data => {
       if (data.total === 0) {
         iziToast.error({
@@ -52,7 +52,7 @@ const searchSubmit = event => {
       }
 
       const galleryTemplate = data.hits
-        .map(el => createGalleryCardTemplate(el))
+        .map(el => createGalleryCard(el))
         .join('');
 
       gallery.innerHTML = galleryTemplate;
